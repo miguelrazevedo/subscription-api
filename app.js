@@ -8,6 +8,7 @@ import subscriptionRouter from './routes/subscriptions.routes.js';
 import { PORT } from './config/env.js';
 import connectDB from './database/mongodb.js';
 import errorMiddleware from './middlewares/error.middleware.js';
+import { authorizeMiddleware } from './middlewares/auth.middleware.js';
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(cookieParser());
 
 // Routes
 app.use('/api/auth', authRouter);
-app.use('/api/users', userRouter);
+app.use('/api/users', authorizeMiddleware, userRouter);
 app.use('/api/subscriptions', subscriptionRouter);
 
 // Error handling middleware - must be last - after other app.use()

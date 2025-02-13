@@ -1,29 +1,28 @@
 import { Router } from 'express';
+import {
+    deleteUserById,
+    getAllUsers,
+    getUserById,
+    updateUserById,
+} from '../controllers/user.controller.js';
+import { signInMiddleware } from '../middlewares/auth.middleware.js';
 
 const userRouter = Router();
 /**
+ * All endpoints are protected by the authorizeMiddleware
+ *
  *
  * /api/users
  *
  */
-userRouter.post('/', (req, res) => {
-    res.json({ message: 'CREATE a new user' });
-});
 
-userRouter.get('/', (req, res) => {
-    res.json({ message: 'GET all users' });
-});
+userRouter.get('/', getAllUsers);
 
-userRouter.get('/:id', (req, res) => {
-    res.json({ message: 'GET user' });
-});
+userRouter.get('/:id', getUserById);
 
-userRouter.put('/:id', (req, res) => {
-    res.json({ message: 'UPDATE user' });
-});
+// Use the signInMiddleware to verify the body to update the user
+userRouter.put('/:id', signInMiddleware, updateUserById);
 
-userRouter.delete('/:id', (req, res) => {
-    res.json({ message: 'DELETE user' });
-});
+userRouter.delete('/:id', deleteUserById);
 
 export default userRouter;
