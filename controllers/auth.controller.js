@@ -51,6 +51,7 @@ export const signUp = async (req, res, next) => {
         );
 
         await session.commitTransaction();
+        session.endSession();
 
         res.status(201).json({
             success: true,

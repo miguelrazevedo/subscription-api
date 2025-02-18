@@ -1,15 +1,15 @@
 import { Router } from 'express';
+import { createSubscriptionMiddleware } from '../middlewares/schema.middleware.js';
+import { createSubscription } from '../controllers/subscription.controller.js';
 
 const subscriptionRouter = Router();
 
 /**
- *
+ * All endpoints are protected by the authorizeMiddleware
  * /api/subscriptions
  *
  */
-subscriptionRouter.post('/', (req, res) => {
-    res.json({ message: 'CREATE a subscriptions' });
-});
+subscriptionRouter.post('/', createSubscriptionMiddleware, createSubscription);
 
 subscriptionRouter.get('/', (req, res) => {
     res.json({ message: 'GET all subscriptions' });

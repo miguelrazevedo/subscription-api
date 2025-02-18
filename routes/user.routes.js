@@ -5,7 +5,7 @@ import {
     getUserById,
     updateUserById,
 } from '../controllers/user.controller.js';
-import { signInMiddleware } from '../middlewares/auth.middleware.js';
+import { signInSchemaMiddleware } from '../middlewares/schema.middleware.js';
 
 const userRouter = Router();
 /**
@@ -21,7 +21,7 @@ userRouter.get('/', getAllUsers);
 userRouter.get('/:id', getUserById);
 
 // Use the signInMiddleware to verify the body to update the user
-userRouter.put('/:id', signInMiddleware, updateUserById);
+userRouter.put('/:id', signInSchemaMiddleware, updateUserById);
 
 userRouter.delete('/:id', deleteUserById);
 

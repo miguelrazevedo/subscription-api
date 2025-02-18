@@ -85,6 +85,7 @@ export const updateUserById = async (req, res, next) => {
         }
 
         await session.commitTransaction();
+        session.endSession();
 
         res.status(200).json({
             success: true,

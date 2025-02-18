@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import {
-    signUpMiddleware,
-    signInMiddleware,
-} from '../middlewares/auth.middleware.js';
-import {
     getNewAccessToken,
     signIn,
     signOut,
     signUp,
 } from '../controllers/auth.controller.js';
+import {
+    signInSchemaMiddleware,
+    signUpSchemaMiddleware,
+} from '../middlewares/schema.middleware.js';
 
 const authRouter = Router();
 
@@ -18,9 +18,9 @@ const authRouter = Router();
  *
  */
 
-authRouter.post('/sign-up', signUpMiddleware, signUp);
+authRouter.post('/sign-up', signUpSchemaMiddleware, signUp);
 
-authRouter.post('/sign-in', signInMiddleware, signIn);
+authRouter.post('/sign-in', signInSchemaMiddleware, signIn);
 
 authRouter.post('/sign-out', signOut);
 
