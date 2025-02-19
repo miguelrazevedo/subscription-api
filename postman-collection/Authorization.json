@@ -1,0 +1,31 @@
+{
+	"info": {
+		"_postman_id": "16ac688e-4ac1-44f1-96f3-e459b57c5682",
+		"name": "Authorization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14767028"
+	},
+	"item": [
+		{
+			"name": "Get new Access Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/auth/access-token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"access-token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

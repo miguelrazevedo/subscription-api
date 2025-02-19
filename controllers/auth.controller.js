@@ -13,7 +13,6 @@ import {
     generateRefreshToken,
     verifyRefreshToken,
 } from '../utils/jwt.js';
-import TokenExpiredError from 'jsonwebtoken';
 
 // Using try-catches to use express' error handling
 
@@ -56,9 +55,7 @@ export const signUp = async (req, res, next) => {
         res.status(201).json({
             success: true,
             message: 'User created successfully',
-            data: {
-                user: users[0],
-            },
+            data: { user: users[0] },
         });
     } catch (error) {
         await session.abortTransaction();
@@ -185,9 +182,7 @@ export const getNewAccessToken = async (req, res, next) => {
         res.status(200).json({
             success: true,
             message: 'Access Token generated successfully',
-            data: {
-                accessToken,
-            },
+            data: { accessToken },
         });
     } catch (error) {
         if (error.name === 'TokenExpiredError') {

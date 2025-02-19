@@ -24,7 +24,7 @@ export const getAllUsers = async (req, res, next) => {
     try {
         const users = await User.find().select('-password');
 
-        res.json({ success: true, message: 'Users found', data: { users } });
+        res.json({ success: true, message: 'Users found', data: users });
     } catch (error) {
         next(error);
     }
@@ -49,7 +49,7 @@ export const getUserById = async (req, res, next) => {
             throw error;
         }
 
-        res.json({ success: true, message: 'User found', data: { user } });
+        res.json({ success: true, message: 'User found', data: user });
     } catch (error) {
         next(error);
     }
@@ -90,7 +90,7 @@ export const updateUserById = async (req, res, next) => {
         res.status(200).json({
             success: true,
             message: 'User update successfully',
-            data: user,
+            data: { user },
         });
     } catch (error) {
         await session.abortTransaction();
@@ -107,13 +107,15 @@ export const updateUserById = async (req, res, next) => {
  * @param {ExpressNextFunction} next
  */
 export const deleteUserById = async (req, res, next) => {
-    // User can only delete himself
+    const session = await mongoose.startSession();
+    session.startTransaction();
 
+    // User can only delete himself
     try {
         const { id } = req.params;
         if (id !== req.user.id) {
             const err = new Error('User can only delete himself');
-            err.statusCode = 404;
+            err.statusCode = 401;
             throw err;
         }
 
@@ -125,14 +127,19 @@ export const deleteUserById = async (req, res, next) => {
             throw err;
         }
 
-        // Before deleting the user, sign out the user
+        // Sign out the user
         res.clearCookie('refreshToken');
+
+        await session.commitTransaction();
+        session.endSession();
 
         res.status(200).json({
             success: true,
             message: 'User deleted successfully',
         });
     } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
         next(error);
     }
 };
