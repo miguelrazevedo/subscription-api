@@ -33,7 +33,7 @@ A Node.js backend server that provides secure routes and robust authentication.
 
 ## Error Handling
 
-Errors are passed through custom middleware that responds with standardized messages for consistency.
+Errors are passed through custom middleware that responds with the proper error message.
 
 ## Environment Variables
 
