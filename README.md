@@ -41,12 +41,12 @@ The following variables are setup in the `.env.js` which imports the variables f
 
 -   `PORT`: Number,
 -   `NODE_ENV`: 'production | environment',
--   `DB_URI`: 'String',
--   `JWT_ACCESS_SECRET`: 'String',
--   `JWT_ACCESS_EXPIRES_IN`: 'String',
--   `JWT_REFRESH_SECRET`: 'String',
--   `JWT_REFRESH_EXPIRES_IN`: 'String',
--   `ARCJET_KEY`: 'String',
+-   `DB_URI`: String,
+-   `JWT_ACCESS_SECRET`: String,
+-   `JWT_ACCESS_EXPIRES_IN`: String,
+-   `JWT_REFRESH_SECRET`: String,
+-   `JWT_REFRESH_EXPIRES_IN`: String,
+-   `ARCJET_KEY`: String,
 -   `ARCJET_ENV`: 'production | environment',
 
 ## Postman collection
