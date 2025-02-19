@@ -17,7 +17,7 @@ A Node.js backend server that provides secure routes and robust authentication.
 1. Clone the repository
 2. Install dependencies: `npm install`
 3. Create a `.env` with credentials (e.g., JWT_SECRET)
-4. Start the server: `npm start`
+4. Start the server: `node app.js`
 
 ## Authentication & Authorization
 
